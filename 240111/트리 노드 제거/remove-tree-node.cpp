@@ -1,61 +1,41 @@
 #include <iostream>
-#include <stack>
+#include <vector>
+
 using namespace std; 
 
-stack<int> s;
+vector<int> arr[51];
 int main() {
     int n;
     cin >> n;
 
-    int start = -1;
-    int arr[51];
     for(int i = 0; i < n; ++i){
-        cin >> arr[i];
-        if(arr[i] == -1) start = i;
+        int a;
+        cin >> a;
+        arr[a].push_back(i);
     }
 
     int del;
     cin >> del;
-    arr[del] = -2;
 
-    while(1) {
-        for(int i = 0; i < n; ++i){
-            if(arr[i] == del){
-                arr[i] = -2;
-                s.push(i);
+    int start = 0;
+    int cnt = 0;
+    vector<int>::iterator it;
+    while(1){
+        if(!arr[start].empty()){
+            if(start != del) cnt++;
+            cout << cnt;
+            return 0;
+        }
+        for(it = arr[start].begin(); it != arr[start].end(); ++it){
+            if(*it != del) {
+                start = *it;
+                break;
             }
         }
-        
-        if(s.empty()) break;
-        del = s.top();
-        s.pop();
     }
 
-    stack<int> k;
-    int ans = 0;
-    while(1) {
-        if(arr[start] == -2) {
-            if(s.empty()) break;
-            del = s.top();
-            s.pop();
-            continue;
-        }
 
-        int cnt = 0;
-        for(int i = 0; i < n; ++i){
-            if(arr[i] == start){
-                s.push(i);
-                cnt++;
-            }
-        }
-        if(cnt == 0) ans++;
-        
-        if(s.empty()) break;
-        del = s.top();
-        s.pop();
-    }
-
-    cout << ans;
+    
 
     return 0;
 }
