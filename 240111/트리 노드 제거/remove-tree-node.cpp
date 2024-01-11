@@ -30,14 +30,20 @@ int main() {
         del = s.top();
         s.pop();
     }
-    
+
     stack<int> k;
     int ans = 0;
     while(1) {
+        if(arr[start] == -2) {
+            if(s.empty()) break;
+            del = s.top();
+            s.pop();
+            continue;
+        }
+
         int cnt = 0;
         for(int i = 0; i < n; ++i){
             if(arr[i] == start){
-                arr[i] = -2;
                 s.push(i);
                 cnt++;
             }
