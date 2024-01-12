@@ -12,7 +12,7 @@ bool visited[1001] = {0, };
 
 void dfs(int node){
     for(auto i : arr[node]){
-        if(!visited[node])
+        if(!visited[i])
         visited[i] = 1;
         dfs(i);
     }
@@ -57,7 +57,6 @@ int main() {
         cout << "0";
         return 0;
     }
-
 
     //3번 조건 확인
     visited[root] = 1;
