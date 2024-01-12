@@ -7,8 +7,8 @@ using namespace std;
 unordered_set<int> e;
 unordered_set<int> s;
 unordered_set<int> all;
-vector<int> arr[1001];
-bool visited[1001] = {0, };
+vector<int> arr[10001];
+bool visited[10001] = {0, };
 
 void dfs(int node){
     for(auto i : arr[node]){
