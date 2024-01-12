@@ -1,63 +1,62 @@
 #include <iostream>
-#include <algorithm>
+#include <vector>
+#include <tuple>
+
+#define MAX_N 1000
 
 using namespace std;
 
-int arr[1005][1005] = {0, };
-int leng[1005] = {0, };
-bool visited[1005][1005] = {0, };
+// 변수 선언:
 int n, m;
+vector<pair<int, int> > edges[MAX_N + 1];
+bool visited[MAX_N + 1];
+int dist[MAX_N + 1][MAX_N + 1];
 
-void initVisited(){
-    for(int i = 0; i <= n; ++i){
-        for(int j = 0; j <= n; ++j){
-            visited[i][j] = 0;
-        }
-    }
-}
-
-void initLeng(){
-    for(int i = 0; i <= n; ++i){
-        leng[i] = 1001;
-    }
-}
-
-void dfs(int node){
-    for(int i = 1; i <= n; ++i){
-        if ( arr[node][i] != 0 ){//간선이 존재한다면
-            if( !visited[node][i] ){ // 아직 방문 안했으면
-                visited[node][i] = 1; //방문해야지
-                leng[i] = min(leng[i], leng[node] + arr[node][i]);
-                //cout << node << " " << i << endl;
-                dfs(i);
-            }
-        }
-
-    }
-}
-int main() {
-    cin >> n >> m;
-    for(int i = 0; i < n-1; ++i) {
-        int s, e, v;
-        cin >> s >> e >> v;
-        arr[s][e] = v;
-        arr[e][s] = v;
-    }
-
-    for(int i = 0; i < m; ++i){
-        int start, end;
-        cin >> start >> end;
+// DFS를 통해 st로부터 모든 정점까지의 거리를 탐색합니다.
+void DFS(int st, int x) {
+    for(int i = 0; i < (int) edges[x].size(); i++) {
+        int y, d;
+        tie(y, d) = edges[x][i];
+        // 이미 방문한 노드는 스킵합니다.
+        if(visited[y]) continue;
         
-        initVisited();
-        initLeng();
+        visited[y] = true;
 
-        //visited[start][end] = 1;
-        leng[start] = 0;
-        dfs(start);
+        // st로부터의 거리를 갱신합니다.
+        dist[st][y] = dist[st][x] + d;
 
-        cout << leng[end] << endl;
+        DFS(st, y);
+    }
+}
+
+int main() {
+    // 입력:
+    cin >> n >> m;
+    // n - 1개의 간선 정보를 입력받습니다.
+    for(int i = 1; i <= n - 1; i++) {
+        int x, y, d;
+        cin >> x >> y >> d;
+
+        // 간선 정보를 인접리스트에 넣어줍니다.
+        edges[x].push_back({y, d});
+        edges[y].push_back({x, d});
     }
 
+    // 각 n개의 정점에 대해, 모든 노드간의 거리를 DFS로 갱신해줍니다.
+    for(int i = 1; i <= n; i++) {
+        for(int j = 1; j <= n; j++) 
+            visited[j] = false;
+        
+        visited[i] = true;
+        DFS(i, i);
+    }
+
+    // m개의 노드 쌍을 입력받고, 두 노드 쌍 간의 거리를 바로 출력해줍니다.
+    for(int i = 1; i <= m; i++) {
+        int x, y;
+        cin >> x >> y;
+        cout << dist[x][y] << endl;
+    }
 
     return 0;
 }
