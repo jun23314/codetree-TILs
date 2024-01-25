@@ -14,7 +14,7 @@ int find(int x){
 
 void unions(int x, int y){
     int a = find(x);
-    int b = find(b);
+    int b = find(y);
     uf[a] = b;
 }
 
