@@ -20,7 +20,7 @@ void unions(int x, int y){
     if (a != b) {
         uf[a] = b;
         size[b] += size[a];
-        size[a] += size[b];
+        //size[a] += size[b];
     }
     else{
         cnt++;
@@ -42,11 +42,15 @@ int main() {
     }
 
     int max = -1;
+    int better = -1;
     for(int i = 1; i <= n; ++i){
-        if(size[i] > max) max = size[i];
+        if(size[i] > max) {
+            better = max;
+            max = size[i];
+        }
     }
-    
-    cnt += (n-max);
+
+    cnt += max/2;
 
     cout << cnt;
     return 0;
