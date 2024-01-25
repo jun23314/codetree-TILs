@@ -18,7 +18,9 @@ void unions(int x, int y){
     int b = find(y);
     if(a != b){
         uf[a] = b;
+        int tmp = size[b];
         size[b] += size[a];
+        size[a] += tmp;
     }
     
 }
@@ -35,7 +37,7 @@ int main() {
         int a, b;
         cin >> a >> b;
         unions(a, b);
-        cout << size[b] << endl;
+        cout << size[a] << endl;
     }
     return 0;
 }
