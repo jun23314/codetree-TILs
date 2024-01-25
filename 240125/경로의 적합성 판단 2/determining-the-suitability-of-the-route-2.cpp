@@ -20,6 +20,10 @@ void unions(int x, int y){
 
 int main() {
     cin >> n >> m >> k;
+    for(int i = 1; i <= n; ++i){
+        uf[i] = i;
+    }
+    
     for(int i = 0; i < m; ++i){
         int a, b;
         cin >> a >> b;
