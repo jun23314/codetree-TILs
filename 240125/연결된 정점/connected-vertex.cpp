@@ -4,6 +4,7 @@ using namespace std;
 
 int n, m;
 int uf[100001];
+int size[100001] = {0, };
 
 int find(int x){
     if(uf[x] == x) return x;
@@ -15,7 +16,11 @@ int find(int x){
 void unions(int x, int y){
     int a = find(x);
     int b = find(y);
-    uf[a] = b;
+    if (a != b) {
+        uf[a] = b;
+        size[b] += size[a];
+        size[a] += size[b];
+    }
 }
 
 int main() {
@@ -23,6 +28,7 @@ int main() {
 
     for(int i = 1; i <= n; ++i){
         uf[i] = i;
+        size[i] = 1;
     }
 
     for(int i = 0; i < m; ++i){
@@ -38,12 +44,7 @@ int main() {
             int a;
             cin >> a; 
             int seek = find(a); // 이러면 루트 노드가 나오겠징?
-            int cnt = 0;
-            for(int i = 1; i <= n; ++i){
-                if(find(uf[i]) == seek) cnt++;
-            }
-
-            cout << cnt << endl;
+            cout << size[seek] << endl;
         }
     }
     return 0;
