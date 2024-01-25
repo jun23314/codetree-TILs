@@ -21,6 +21,10 @@ void unions(int x, int y){
         int tmp = size[b];
         size[b] += size[a];
         size[a] += tmp;
+        /*for(int i = 1; i <= 4; ++i){
+            cout << size[i] << " ";
+        }
+        cout << endl;*/
     }
     
 }
@@ -37,7 +41,7 @@ int main() {
         int a, b;
         cin >> a >> b;
         unions(a, b);
-        cout << size[a] << endl;
+        cout << size[b] << endl;
     }
     return 0;
 }
