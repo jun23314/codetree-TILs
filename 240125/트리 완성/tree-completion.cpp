@@ -41,16 +41,14 @@ int main() {
         unions(a, b);
     }
 
-    int max = -1;
-    int better = -1;
-    for(int i = 1; i <= n; ++i){
-        if(size[i] > max) {
-            better = max;
-            max = size[i];
+    int root = find(uf[1]);
+    for(int i = 2; i <= n; ++i){
+        if(find(uf[i-1])!=find(uf[i])){
+            root = find(uf[i]);
+            unions(i, i-1);
+            cnt++;
         }
     }
-
-    cnt += max/2;
 
     cout << cnt;
     return 0;
