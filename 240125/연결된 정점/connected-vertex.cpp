@@ -32,6 +32,7 @@ int main() {
             int a, b;
             cin >> a >> b;
             unions(a, b);
+
         }
         else{
             int a;
@@ -39,7 +40,7 @@ int main() {
             int seek = find(a); // 이러면 루트 노드가 나오겠징?
             int cnt = 0;
             for(int i = 1; i <= n; ++i){
-                if(uf[i] == seek) cnt++;
+                if(find(uf[i]) == seek) cnt++;
             }
 
             cout << cnt << endl;
