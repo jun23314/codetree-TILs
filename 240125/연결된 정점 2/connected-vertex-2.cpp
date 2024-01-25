@@ -1,44 +1,48 @@
 #include <iostream>
+#include <unordered_map>
 
 using namespace std;
 
-int n;
-int uf[100001];
-int size[100001];
+const int MAX_N = 100001;
 
-int find(int x){
-    if(uf[x] == x) return x;
-    int root = find(uf[x]);
-    uf[x] = root;
-    return root;   
+int parent[MAX_N];
+int componentSize[MAX_N];
+
+int find(int x) {
+    if (parent[x] == x) return x;
+    return parent[x] = find(parent[x]);
 }
 
-void unions(int x, int y){
-    int a = find(x);
-    int b = find(y);
-    if(a != b){
-        uf[b] = a;
-        int tmp = size[b];
-        size[b] += size[a];
-        size[a] += tmp;
+void unionSets(int x, int y) {
+    int rootX = find(x);
+    int rootY = find(y);
 
-        cout << size[a] << endl;
+    if (rootX != rootY) {
+        parent[rootX] = rootY;
+        componentSize[rootY] += componentSize[rootX];
     }
-    
 }
 
 int main() {
+    int n;
     cin >> n;
 
-    for(int i = 1; i <= 100000; ++i){
-        uf[i] = i;
-        size[i] = 1;
+    for (int i = 1; i <= 100000; ++i) {
+        parent[i] = i;
+        componentSize[i] = 1;
     }
 
-    for(int i = 0; i < n; ++i){
+    for (int i = 0; i < n; ++i) {
         int a, b;
         cin >> a >> b;
-        unions(a, b);
+
+        int sizeA = componentSize[find(a)];
+        int sizeB = componentSize[find(b)];
+
+        unionSets(a, b);
+
+        cout << sizeA + sizeB << endl;
     }
+
     return 0;
 }
