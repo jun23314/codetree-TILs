@@ -16,14 +16,13 @@ int find(int x){
 void unions(int x, int y){
     int a = find(x);
     int b = find(y);
-    cout << a << " " << b << endl;
     if(a != b){
-        if(a > b) uf[a] = b;
-        else uf[b] = a;
+        uf[b] = a;
         int tmp = size[b];
         size[b] += size[a];
         size[a] += tmp;
-        
+
+        cout << size[a] << endl;
     }
     
 }
@@ -40,7 +39,6 @@ int main() {
         int a, b;
         cin >> a >> b;
         unions(a, b);
-        cout << size[a] << endl;
     }
     return 0;
 }
