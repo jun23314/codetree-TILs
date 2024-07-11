@@ -13,6 +13,7 @@ bool checkBeautiful(){
         int count = 1;
         for(int j = 1; j < num; ++j) if(v[i+j] == num) count++;
         if(count != num) return false; 
+        i += v[i] - 1;
     }
     return true;
 }
