@@ -20,6 +20,7 @@ void choose(int curr_idx, int curr_val, int result){
         v.pop_back();
     }
 }
+
 int main() {
     scanf("%d %d", &n, &m);
 
