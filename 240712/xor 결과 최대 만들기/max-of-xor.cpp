@@ -10,14 +10,13 @@ vector<int> v;
 
 void choose(int curr_idx, int curr_val, int result){
     if(curr_idx == m + 1){
-
         if(result > max_val) max_val = result;
         return ;
     }
     
     for(int i = curr_val; i < n; ++i){
         v.push_back(num[i]);
-        choose(curr_idx+1, curr_val+1, result^num[i]);
+        choose(curr_idx+1, i+1, result^num[i]);
         v.pop_back();
     }
 }
