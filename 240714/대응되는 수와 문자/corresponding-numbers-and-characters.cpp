@@ -14,8 +14,9 @@ int main() {
 
         string num = "";
         num = i + '0';
-        um[c] = num;
+
         um[num] = c;
+        um[c] = num;
     }
 
     for(int i = 0; i < m; ++i){
