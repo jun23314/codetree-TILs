@@ -19,19 +19,14 @@ int main() {
         else m[num]++;
     }
 
-    for(int i = 3; i <= n; ++i){
-        arr[i] = arr[i-1] + (i - 1);
-    }
-
     for(auto i: m){
-        int toFind = k - i.first;
+        int num = i.first;
+        int toFind = k - num;
+
         if(m.find(toFind) == m.end()) continue;
 
-        int tmp = m.find(toFind)->second;
-        if(toFind == (i.first) && tmp > 1) {
-            cnt += 2 * (arr[tmp]);
-        }
-        else cnt++;
+        if(num == toFind) cnt += i.second * (i.second - 1);
+        else cnt += i.second *m[toFind];
     }
 
     cout << cnt/2;
