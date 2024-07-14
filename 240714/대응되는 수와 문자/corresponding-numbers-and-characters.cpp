@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <unordered_map>
 
 using namespace std;
@@ -11,12 +12,9 @@ int main() {
     for(int i = 1; i <= n; ++i){
         string c;
         cin >> c;
-
-        string num = "";
-        num = i + '0';
-
-        um[num] = c;
-        um[c] = num;
+        
+        um[c] = to_string(i);
+        um[to_string(i)] = c;
     }
 
     for(int i = 0; i < m; ++i){
