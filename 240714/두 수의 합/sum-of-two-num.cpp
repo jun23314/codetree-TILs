@@ -6,7 +6,7 @@ using namespace std;
 int n, k;
 int cnt = 0;
 unordered_map<int, int> m;
-
+int arr[100001] = {0, 0, 1, };
 int main() {
     cin >> n >> k;
 
@@ -18,11 +18,18 @@ int main() {
         else m[num]++;
     }
 
+    for(int i = 3; i <= n; ++i){
+        arr[i] = arr[i-1] + (i - 1);
+    }
+
     for(auto i: m){
         int toFind = k - i.first;
         if(m.find(toFind) == m.end()) continue;
 
-        if(toFind == (i.second) && m.find(toFind)->second > 1) cnt += 2;
+        int tmp = m.find(toFind)->second;
+        if(toFind == (i.first) && tmp > 1) {
+            cnt += 2 * (arr[tmp]);
+        }
         else cnt++;
     }
 
