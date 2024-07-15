@@ -4,13 +4,13 @@
 using namespace std;
 
 int n;
-int x, y;
-unordered_map<int, int> m;
+long long x, y;
+unordered_map<long long, long long> m;
 int main() {
     scanf("%d", &n);
 
     for(int i = 0; i < n; ++i){
-        scanf("%d %d", &x, &y);
+        scanf("%lld %lld", &x, &y);
         
         if(m.find(x) == m.end()) m[x] = y;
         else{
