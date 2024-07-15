@@ -18,11 +18,11 @@ int main() {
         }
     }
 
-    int sum = 0;
+    long long sum = 0;
     for(auto i: m){
         sum += i.second;
     }
     
-    printf("%d", sum);
+    printf("%lld", sum);
     return 0;
 }
