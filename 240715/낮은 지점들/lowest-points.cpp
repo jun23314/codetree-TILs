@@ -12,8 +12,10 @@ int main() {
     for(int i = 0; i < n; ++i){
         scanf("%d %d", &x, &y);
         
-        if(m.find(x) == m.end() || m.find(x)->second > y) m[x] = y;
-        
+        if(m.find(x) == m.end()) m[x] = y;
+        else{
+            if(m.find(x)->second > y) m[x] = y;
+        }
     }
 
     int sum = 0;
