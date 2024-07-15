@@ -16,7 +16,7 @@ int main() {
     }
 
     int cnt = 0;
-    for(it = s.rbegin(); it != s.rend(); --it){
+    for(it = s.rbegin(); it != s.rend(); ++it){
         if(cnt == k) break;
         cout << *it << " ";
         cnt++;
