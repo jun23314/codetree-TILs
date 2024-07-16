@@ -18,18 +18,13 @@ int main() {
     for(int i = 0; i < m; ++i){
         cin >> num;
         
-        it = s.lower_bound(num);
-        if(it == s.end()) {
+        it = s.upper_bound(num);
+        if(it == s.begin()) cout << "-1\n";
+        else{
             it--;
             cout << *it << "\n";
             s.erase(*it);
         }
-        else if(it != s.begin()){ // 답이 있다!
-            if(it != s.find(num)) it--;
-            cout << *it << "\n";
-            s.erase(*it);
-        }
-        else cout << "-1\n";
     }
     return 0;
 }
