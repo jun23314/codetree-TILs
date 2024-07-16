@@ -22,11 +22,12 @@ int main() {
         if(it == s.end()) {
             it--;
             cout << *it << "\n";
+            s.erase(*it);
         }
         else if(it != s.begin()){ // 답이 있다!
             if(it != s.find(num)) it--;
             cout << *it << "\n";
-
+            s.erase(*it);
         }
         else cout << "-1\n";
     }
