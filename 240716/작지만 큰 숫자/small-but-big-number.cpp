@@ -19,14 +19,16 @@ int main() {
         cin >> num;
         
         it = s.lower_bound(num);
-        if(it != s.begin() && it == s.find(num)) cout << num << "\n";
-        else if(it != s.begin()){
+        if(it == s.end()) {
             it--;
             cout << *it << "\n";
-        } 
-        else{
-            cout << "-1\n";
         }
+        else if(it != s.begin()){ // 답이 있다!
+            if(it != s.find(num)) it--;
+            cout << *it << "\n";
+
+        }
+        else cout << "-1\n";
     }
     return 0;
 }
